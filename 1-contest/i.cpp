@@ -1,56 +1,38 @@
 #include <iostream>
 #include <vector>
 
-int buble(std::vector<int> v)
-{
-    size_t i;
-    for (i = 0; i < v.size(); i++) {
-        bool had_swap = false;
-        for (size_t j = 0; j < v.size() - 1; j++) {
-            if (v[j] > v[j + 1]) {
-                std::swap(v[j], v[j + 1]);
-                had_swap = true;
-            }
-        }
-        if (!had_swap)
-            break;
-    }
-
-    return i + 1;
-}
-
-void test(std::vector<int>& v, std::vector<int>& res, int temp, int i)
-{
-    v[temp - 1] = 1;
-    res[i + 1] = buble(v);
-}
-
 int main()
 {
     size_t n = 0;
     std::cin >> n;
     std::vector<int> v(n, 0);
-    std::vector<int> res(n + 1, 0);
 
-    res[0] = 1;
-    size_t min = 0;
-    size_t max = n;
+    size_t max = n + 1;
+    size_t iter = 1;
+    std::cout << 1 << ' ';
     for (size_t i = 0; i < n - 1; i++) {
-        int temp;
+        size_t temp;
         std::cin >> temp;
         v[temp - 1] = 1;
-        // test(v, res, temp, i);
-        for (size_t i = 0; i < max; i++) {
-            if (v[i] == 0) {
+        if (temp == max - 1 && v[temp - 2] == 0) {
+            max--;
+            std::cout << iter << ' ';
+        } else if (temp == max - 1 && v[temp - 2] == 1) {
+            int i = temp - 2;
+            while (i >= 0 && v[i] == 1) {
+                max--;
+                iter--;
+                i--;
             }
+            max--;
+            i--;
+            std::cout << iter << ' ';
+        } else {
+            iter++;
+            std::cout << iter << ' ';
         }
     }
-    res[n] = 1;
-    for (auto&& i : res) {
-        std::cout << i << ' ';
-    }
-
-    std::cout << '\n';
+    std::cout << 1 << '\n';
 
     return 0;
 }
