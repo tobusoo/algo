@@ -1,3 +1,6 @@
+# O(X + n) Space complexity, where X - count of coordinates
+# O(n) Time complexity
+
 # input
 
 # 10 3

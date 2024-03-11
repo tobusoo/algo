@@ -1,3 +1,6 @@
+# O(n) Space complexity
+# O((n+q)logn) Time complexity
+
 # input
 
 # 3
